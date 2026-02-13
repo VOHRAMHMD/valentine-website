@@ -55,7 +55,7 @@ button.addEventListener("click", () => {
             body: JSON.stringify({ message: "Shruti clicked it! ❤️" }),
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
         }).then(() => {
-            button.textContent = "I'll love you forever! ❤️";
+            button.textContent = "I'll Heart you forever! ❤️";
         });
     }
 });
@@ -102,11 +102,11 @@ function drawText() {
     } else if (frameNumber < 2500) {
         if (frameNumber === 1500) opacity = 0;
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        drawTextWithLineBreaks(["I love you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
+        drawTextWithLineBreaks(["I Heart you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
         opacity += 0.01;
     } else {
         context.fillStyle = `rgba(255, 105, 180, 1)`;
-        drawTextWithLineBreaks(["I love you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
+        drawTextWithLineBreaks(["I Heart you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
         context.fillText("Happy Valentine's Day <3", canvas.width/2, (canvas.height/2 + 120));
         button.style.display = "block";
     }
