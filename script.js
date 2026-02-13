@@ -46,38 +46,35 @@ function updateStars() {
     }
 }
 
-// --- FIXED BUTTON SECTION ---
 const button = document.getElementById("valentinesButton");
 
 button.addEventListener("click", () => {
-  if (button.textContent === "Click Me! ❤") {
-    button.textContent = "sending...";
-    
-    fetch('https://formspree.io/f/mreaplye', {
-      method: 'POST',
-      body: JSON.stringify({ 
-        message: "Shruti clicked your Valentine button! ❤️",
-        time: new Date().toLocaleString()
-      }),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      }
-    })
-    .then(response => {
-      if (response.ok) {
-        button.textContent = "I'll love you forever! ❤️";
-      } else {
-        button.textContent = "Error 😞";
-      }
-    })
-    .catch(error => {
-      console.error('Error:', error);
-      button.textContent = "Error 😞";
-    });
-  }
+    if (button.textContent === "Click Me! ❤") {
+        button.textContent = "sending...";
+        
+        fetch('https://formspree.io/f/mreaplye', {
+            method: 'POST',
+            body: JSON.stringify({ 
+                message: "Shruti clicked your Valentine button! ❤️",
+                time: new Date().toLocaleString()
+            }),
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                button.textContent = "I'll love you forever! ❤️";
+            } else {
+                button.textContent = "Error 😞";
+            }
+        })
+        .catch(() => {
+            button.textContent = "Error 😞";
+        });
+    }
 });
-// --- END FIXED BUTTON SECTION ---
 
 function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
     lines.forEach((line, index) => {
@@ -88,15 +85,13 @@ function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
 function drawText() {
     var fontSize = Math.min(30, window.innerWidth / 24); 
     var lineHeight = 8;
-
     context.font = fontSize + "px Comic Sans MS";
     context.textAlign = "center";
-    
     context.shadowColor = "rgba(255, 105, 180, 1)";
     context.shadowBlur = 8;
 
     if(frameNumber < 250){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`; // Fixed the 4255 typo here
+        context.fillStyle = `rgba(255, 105, 180, ${opacity})`; 
         context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
         opacity = opacity + 0.01;
     }
@@ -105,10 +100,8 @@ function drawText() {
         context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
         opacity = opacity - 0.01;
     }
-
-    if(frameNumber == 500){
-        opacity = 0;
-    }
+    if(frameNumber == 500) opacity = 0;
+    
     if(frameNumber > 500 && frameNumber < 750){
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         if (window.innerWidth < 600) {
@@ -127,10 +120,8 @@ function drawText() {
         }
         opacity = opacity - 0.01;
     }
+    if(frameNumber == 1000) opacity = 0;
 
-    if(frameNumber == 1000){
-        opacity = 0;
-    }
     if(frameNumber > 1000 && frameNumber < 1250){
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         context.fillText("to be alive, and to get to spend this life with you", canvas.width/2, canvas.height/2);
@@ -141,10 +132,8 @@ function drawText() {
         context.fillText("to be alive, and to get to spend this life with you", canvas.width/2, canvas.height/2);
         opacity = opacity - 0.01;
     }
+    if(frameNumber == 1500) opacity = 0;
 
-    if(frameNumber == 1500){
-        opacity = 0;
-    }
     if(frameNumber > 1500 && frameNumber < 1750){
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         context.fillText("is so incredibly, unfathomably unlikely", canvas.width/2, canvas.height/2);
@@ -155,10 +144,8 @@ function drawText() {
         context.fillText("is so incredibly, unfathomably unlikely", canvas.width/2, canvas.height/2);
         opacity = opacity - 0.01;
     }
+    if(frameNumber == 2000) opacity = 0;
 
-    if(frameNumber == 2000){
-        opacity = 0;
-    }
     if(frameNumber > 2000 && frameNumber < 2250){
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         if (window.innerWidth < 600) {
@@ -177,10 +164,8 @@ function drawText() {
         }
         opacity = opacity - 0.01;
     }
+    if(frameNumber == 2500) opacity = 0;
 
-    if(frameNumber == 2500){
-        opacity = 0;
-    }
     if(frameNumber > 2500 && frameNumber < 99999){
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         if (window.innerWidth < 600) {
@@ -207,7 +192,6 @@ function drawText() {
         thirdOpacity = thirdOpacity + 0.01;
         button.style.display = "block";
     }   
-
      context.shadowColor = "transparent";
      context.shadowBlur = 0;
 }
