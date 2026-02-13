@@ -1,8 +1,9 @@
 var canvas = document.getElementById("starfield");
+var context = canvas.getContext("2d");
+
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-var context = canvas.getContext("2d");
 var stars = 500;
 var colorrange = [0, 60, 240];
 var starArray = [];
@@ -25,8 +26,6 @@ var frameNumber = 0;
 var opacity = 0;
 var secondOpacity = 0;
 var thirdOpacity = 0;
-
-var baseFrame = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
 
 function drawStars() {
     for (var i = 0; i < stars; i++) {
@@ -51,27 +50,12 @@ const button = document.getElementById("valentinesButton");
 button.addEventListener("click", () => {
     if (button.textContent === "Click Me! ❤") {
         button.textContent = "sending...";
-        
         fetch('https://formspree.io/f/mreaplye', {
             method: 'POST',
-            body: JSON.stringify({ 
-                message: "Shruti clicked your Valentine button! ❤️",
-                time: new Date().toLocaleString()
-            }),
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            }
-        })
-        .then(response => {
-            if (response.ok) {
-                button.textContent = "I'll love you forever! ❤️";
-            } else {
-                button.textContent = "Error 😞";
-            }
-        })
-        .catch(() => {
-            button.textContent = "Error 😞";
+            body: JSON.stringify({ message: "Shruti clicked it! ❤️" }),
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+        }).then(() => {
+            button.textContent = "I'll love you forever! ❤️";
         });
     }
 });
@@ -83,134 +67,63 @@ function drawTextWithLineBreaks(lines, x, y, fontSize, lineHeight) {
 }
 
 function drawText() {
-    var fontSize = Math.min(30, window.innerWidth / 24); 
-    var lineHeight = 8;
+    var fontSize = Math.min(30, window.innerWidth / 24);
     context.font = fontSize + "px Comic Sans MS";
     context.textAlign = "center";
     context.shadowColor = "rgba(255, 105, 180, 1)";
     context.shadowBlur = 8;
 
-    if(frameNumber < 250){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`; 
-        context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
-        opacity = opacity + 0.01;
-    }
-    if(frameNumber >= 250 && frameNumber < 500){
+    if (frameNumber < 250) {
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
-        opacity = opacity - 0.01;
-    }
-    if(frameNumber == 500) opacity = 0;
-    
-    if(frameNumber > 500 && frameNumber < 750){
+        opacity += 0.01;
+    } else if (frameNumber < 500) {
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["amongst trillions and trillions of stars,", "over billions of years"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
-        } else {
-            context.fillText("amongst trillions and trillions of stars, over billions of years", canvas.width/2, canvas.height/2);
-        }
-        opacity = opacity + 0.01;
-    }
-    if(frameNumber >= 750 && frameNumber < 1000){
+        context.fillText("everyday day I cannot believe how lucky I am", canvas.width/2, canvas.height/2);
+        opacity -= 0.01;
+    } else if (frameNumber < 750) {
+        if (frameNumber === 500) opacity = 0;
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["amongst trillions and trillions of stars,", "over billions of years"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
-        } else {
-            context.fillText("amongst trillions and trillions of stars, over billions of years", canvas.width/2, canvas.height/2);
-        }
-        opacity = opacity - 0.01;
-    }
-    if(frameNumber == 1000) opacity = 0;
-
-    if(frameNumber > 1000 && frameNumber < 1250){
+        drawTextWithLineBreaks(["amongst trillions and trillions of stars,", "over billions of years"], canvas.width/2, canvas.height/2, fontSize, 8);
+        opacity += 0.01;
+    } else if (frameNumber < 1000) {
+        context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
+        drawTextWithLineBreaks(["amongst trillions and trillions of stars,", "over billions of years"], canvas.width/2, canvas.height/2, fontSize, 8);
+        opacity -= 0.01;
+    } else if (frameNumber < 1250) {
+        if (frameNumber === 1000) opacity = 0;
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         context.fillText("to be alive, and to get to spend this life with you", canvas.width/2, canvas.height/2);
-        opacity = opacity + 0.01;
-    }
-    if(frameNumber >= 1250 && frameNumber < 1500){
+        opacity += 0.01;
+    } else if (frameNumber < 1500) {
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
         context.fillText("to be alive, and to get to spend this life with you", canvas.width/2, canvas.height/2);
-        opacity = opacity - 0.01;
-    }
-    if(frameNumber == 1500) opacity = 0;
-
-    if(frameNumber > 1500 && frameNumber < 1750){
+        opacity -= 0.01;
+    } else if (frameNumber < 2500) {
+        if (frameNumber === 1500) opacity = 0;
         context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        context.fillText("is so incredibly, unfathomably unlikely", canvas.width/2, canvas.height/2);
-        opacity = opacity + 0.01;
-    }
-    if(frameNumber >= 1750 && frameNumber < 2000){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        context.fillText("is so incredibly, unfathomably unlikely", canvas.width/2, canvas.height/2);
-        opacity = opacity - 0.01;
-    }
-    if(frameNumber == 2000) opacity = 0;
-
-    if(frameNumber > 2000 && frameNumber < 2250){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["and yet here I am to get the impossible", "chance to get to know you"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
-        } else {
-            context.fillText("and yet here I am to get the impossible chance to get to know you", canvas.width/2, canvas.height/2);
-        }
-        opacity = opacity + 0.01;
-    }
-    if(frameNumber >= 2250 && frameNumber < 2500){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["and yet here I am to get the impossible", "chance to get to know you"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
-        } else {
-            context.fillText("and yet here I am to get the impossible chance to get to know you", canvas.width/2, canvas.height/2);
-        }
-        opacity = opacity - 0.01;
-    }
-    if(frameNumber == 2500) opacity = 0;
-
-    if(frameNumber > 2500 && frameNumber < 99999){
-        context.fillStyle = `rgba(255, 105, 180, ${opacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["I love you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width / 2, canvas.height / 2, fontSize, lineHeight);
-        } else {
-            context.fillText("I love you so much Shruti, more than all the time and space in the universe can contain", canvas.width/2, canvas.height/2);
-        }
-        opacity = opacity + 0.01;
-    }
-    
-    if(frameNumber >= 2750 && frameNumber < 99999){
-        context.fillStyle = `rgba(255, 105, 180, ${secondOpacity})`;
-        if (window.innerWidth < 600) {
-            drawTextWithLineBreaks(["and I can't wait to spend all the time in", "the world to share that love with you!"], canvas.width / 2, (canvas.height/2 + 60), fontSize, lineHeight);
-        } else {
-            context.fillText("and I can't wait to spend all the time in the world to share that love with you!", canvas.width/2, (canvas.height/2 + 50));
-        }
-        secondOpacity = secondOpacity + 0.01;
-    }
-
-    if(frameNumber >= 3000 && frameNumber < 99999){
-        context.fillStyle = `rgba(255, 105, 180, ${thirdOpacity})`;
+        drawTextWithLineBreaks(["I love you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
+        opacity += 0.01;
+    } else {
+        context.fillStyle = `rgba(255, 105, 180, 1)`;
+        drawTextWithLineBreaks(["I love you so much Shruti, more than", "all the time and space in the universe can contain"], canvas.width/2, canvas.height/2, fontSize, 8);
         context.fillText("Happy Valentine's Day <3", canvas.width/2, (canvas.height/2 + 120));
-        thirdOpacity = thirdOpacity + 0.01;
         button.style.display = "block";
-    }   
-     context.shadowColor = "transparent";
-     context.shadowBlur = 0;
+    }
 }
 
 function draw() {
-    context.putImageData(baseFrame, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
     drawStars();
     updateStars();
     drawText();
-    if (frameNumber < 99999) {
-        frameNumber++;
-    }
+    frameNumber++;
     window.requestAnimationFrame(draw);
 }
 
 window.addEventListener("resize", function () {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-    baseFrame = context.getImageData(0, 0, window.innerWidth, window.innerHeight);
 });
 
 window.requestAnimationFrame(draw);
